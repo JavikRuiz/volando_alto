@@ -27,7 +27,7 @@
                                 <button type="submit" class="btn btn-warning">editar</button>
                             </form>
                         </td>
-                        <td>
+                        {{-- <td>
                             
                             <form method="post" action="{{url('app/avion/'.$a->id)}}">
                                 @csrf
@@ -35,7 +35,7 @@
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('desea borrar?')">borrar</button>
                             </form>
                             
-                        </td>
+                        </td> --}}
                     </tr>
                 @endforeach
                 

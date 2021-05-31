@@ -3,8 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12" style="margin-top: 30px">
-            <form method="POST" action="{{route('reservacion.store')}}" autocomplete="off">
-                {{ csrf_field() }}
+            
                 <table class="table" style="margin-top: 30px">
                    <h3>Selecciona un Vuelo</h3>
                     <thead>
@@ -23,8 +22,10 @@
                     </thead>
                     <tbody>
                         @foreach ($vuelo as $v)
+                        <form method="POST" action="{{route('reservacion.store')}}" autocomplete="off">
+                            {{ csrf_field() }}
                             <tr>
-                                <th scope="row"><input type="hidden" value="{{$v->id}}" name="id_vuelo"> {{$v->id}}</th>
+                                <th scope="row">{{$v->id}}</th>
                                 <td>{{$v->avion->tipo_avion->tipo}}</td>
                                 <td>{{$v->avion->identificacion}}</td>
                                 <td>{{$v->lugar->origen}}</td>
@@ -32,25 +33,27 @@
                                 <td>{{$v->lugar->tarifa}}</td>
                                 <td>{{$v->avion->cant_pasajeros}}</td>
                                 <td>
+                                    
+                                        <input type="hidden" value="{{$v->id}}" name="id_vuelo"> 
+                                        <select  class="form-control" name="id_pasajero" required>
+                                            {{-- <option ></option> --}}
+                                            @foreach($cliente as $c)
+                                                <option value="{{$c->id}}"> {{$c->nombre}} {{$c->apellido}}  </option>
+                                            @endforeach
+                                        </select>
+                                    
                                    
-                                    <select  class="form-control" name="id_pasajero" required>
-                                        {{-- <option ></option> --}}
-                                         @foreach($cliente as $c)
-                                             <option value="{{$c->id}}"> {{$c->nombre}} {{$c->apellido}}  </option>
-                                        @endforeach
-                                     </select>
                                    
                                 </td>
-                                <td><button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Desea Confirmar Reservacion?')">Confirmar</button></td>
-                                
-                            </tr>
+                                <td><button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Desea Confirmar Reservacion?')">Confirmar</button></td>  
+                            </tr>  
+                        </form>
+                            
                         @endforeach
                         
                    
                     </tbody>
                 </table>
-                               
-              </form>
         </div>
     </div>
 </div>
